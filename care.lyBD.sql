@@ -5,7 +5,7 @@ create table usuarios (
 CD_usuario int auto_increment primary key,
 NM_usuario varchar (100) not null,
 emai varchar(250) not null unique,
-senha varchar (10) not null unique,
+senha varchar (20) not null unique,
 cpf int (10) not null unique
 );
 
@@ -13,7 +13,7 @@ create table instituicoes (
 CD_instituicao int auto_increment primary key,
 NM_instituicao varchar (100) not null,
 email_instintuicao varchar (250) not null unique,
-senha varchar (10) not null unique,
+senha varchar (20) not null unique,
 descricao text,
 endereco_instituicao varchar (300) not null,
 telefone int (12)
@@ -36,3 +36,9 @@ create table formulario(
     FOREIGN KEY (CD_usuario) REFERENCES usuarios(CD_usuario)
     );
     
+create table admin(
+CD_admin int auto_increment primary key,
+NM_admin varchar (200) not null,
+email_admin varchar (250) not null unique,
+senha varchar (20) not null unique
+);
