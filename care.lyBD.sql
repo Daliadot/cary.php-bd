@@ -1,17 +1,26 @@
 create database care_ly;
 use care_ly;
 
+/*
+DROP TABLE IF EXISTS admin;
+DROP TABLE IF EXISTS formulario;
+DROP TABLE IF EXISTS servicos;
+DROP TABLE IF EXISTS instituicoes;
+DROP TABLE IF EXISTS usuarios;
+*/
+
+
 create table usuarios (
-CD_usuario int auto_increment primary key,
-NM_usuario varchar (100) not null,
-emai varchar(250) not null unique,
+cd_usuario int auto_increment primary key,
+nm_usuario varchar (100) not null,
+email varchar(250) not null unique,
 senha varchar (20) not null unique,
-cpf int (10) not null unique
+cpf int (11) not null unique,
 );
 
 create table instituicoes (
-CD_instituicao int auto_increment primary key,
-NM_instituicao varchar (100) not null,
+cd_instituicao int auto_increment primary key,
+nm_instituicao varchar (100) not null,
 email_instintuicao varchar (250) not null unique,
 senha varchar (20) not null unique,
 descricao text,
@@ -20,25 +29,28 @@ telefone int (12)
 );
 
 CREATE TABLE servicos (
-    CD_servico INT AUTO_INCREMENT PRIMARY KEY,
+    cd_servico INT AUTO_INCREMENT PRIMARY KEY,
     descricao TEXT NOT NULL,
     horas_servico FLOAT,
-    CD_instituicao INT,
-    FOREIGN KEY (CD_instituicao) REFERENCES instituicoes(CD_instituicao)
+    cd_instituicao INT,
+    FOREIGN KEY (cd_instituicao) REFERENCES instituicoes(cd_instituicao)
 );
 
 create table formulario(
-	ID_form int auto_increment primary key,
+	id_form int auto_increment primary key,
 	status enum('pending','approved','rejected') NOT NULL DEFAULT 'pending',
-    CD_instituicao INT,
-    CD_usuario INT,
-    FOREIGN KEY (CD_instituicao) REFERENCES instituicoes(CD_instituicao),
-    FOREIGN KEY (CD_usuario) REFERENCES usuarios(CD_usuario)
+    form_dataenvio date default (sysdate()),
+    cd_instituicao INT,
+    cd_usuario INT,
+    FOREIGN KEY (cd_instituicao) REFERENCES instituicoes(cd_instituicao),
+    FOREIGN KEY (cd_usuario) REFERENCES usuarios(cd_usuario)
     );
     
 create table admin(
-CD_admin int auto_increment primary key,
-NM_admin varchar (200) not null,
+cd_admin int auto_increment primary key,
+nm_admin varchar (200) not null,
 email_admin varchar (250) not null unique,
 senha varchar (20) not null unique
 );
+
+
