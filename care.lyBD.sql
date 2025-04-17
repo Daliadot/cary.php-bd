@@ -15,7 +15,7 @@ cd_usuario int auto_increment primary key,
 nm_usuario varchar (100) not null,
 email varchar(250) not null unique,
 senha varchar (20) not null unique,
-cpf int (11) not null unique,
+cpf int (11) not null unique
 );
 
 create table instituicoes (
@@ -28,7 +28,7 @@ endereco_instituicao varchar (300) not null,
 telefone int (12)
 );
 
-CREATE TABLE servicos (
+CREATE TABLE servico (
     cd_servico INT AUTO_INCREMENT PRIMARY KEY,
     descricao TEXT NOT NULL,
     horas_servico FLOAT,
@@ -42,8 +42,10 @@ create table formulario(
     form_dataenvio date default (sysdate()),
     cd_instituicao INT,
     cd_usuario INT,
+    cd_servico INT,
     FOREIGN KEY (cd_instituicao) REFERENCES instituicoes(cd_instituicao),
-    FOREIGN KEY (cd_usuario) REFERENCES usuarios(cd_usuario)
+    FOREIGN KEY (cd_usuario) REFERENCES usuarios(cd_usuario),
+    FOREIGN KEY (cd_servico) REFERENCES servico(cd_servico)
     );
     
 create table admin(
@@ -52,5 +54,7 @@ nm_admin varchar (200) not null,
 email_admin varchar (250) not null unique,
 senha varchar (20) not null unique
 );
+
+DROP DATABASE care_ly;
 
 
